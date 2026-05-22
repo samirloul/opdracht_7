@@ -1,58 +1,114 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# BE-opdracht 07 - Feature 1
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Laravel MVC-applicatie voor examentraining Software Developer.
 
-## About Laravel
+## Inhoud
+- Instructeurs in dienst (gesorteerd op sterren)
+- Overzicht door instructeur gebruikte voertuigen
+- Wijzigen voertuiggegevens (scenario 01-04)
+- Overzicht allergenen met pagination (max 4 records)
+- Unit tests + feature tests
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Techniek
+- PHP 8+
+- Laravel 13
+- MySQL (verplicht voor stored procedure)
+- HTML/CSS/JS
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Lokale installatie
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
+1. Clone repository
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/samirloul/opdracht_7.git
+cd opdracht_7
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+2. Dependencies installeren
+```bash
+composer install
+```
 
-## Contributing
+3. Environment bestand
+```bash
+copy .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. Zet MySQL variabelen in .env
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=be_opdracht7
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-## Code of Conduct
+5. Config cache leegmaken
+```bash
+php artisan config:clear
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Database setup
 
-## Security Vulnerabilities
+Je hebt 2 opties:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Optie A (aanbevolen): Laravel migraties + seeder
+```bash
+php artisan migrate:fresh --seed
+```
 
-## License
+### Optie B: volledige SQL import
+Importeer [db/create_database.sql](db/create_database.sql) in MySQL/phpMyAdmin.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Stored procedure installeren (MySQL)
+
+Voer het script uit:
+- [db/stored_procedures.sql](db/stored_procedures.sql)
+
+Voorbeeld via MySQL CLI:
+```bash
+mysql -u root -p be_opdracht7 < db/stored_procedures.sql
+```
+
+## App starten
+```bash
+php artisan serve
+```
+
+Open daarna:
+- `http://127.0.0.1:8000/`
+
+## Tests draaien
+```bash
+php artisan test
+```
+
+## Belangrijke mappen
+- `app/Http/Controllers` MVC controllers
+- `app/Models` Eloquent modellen
+- `app/Services/VoertuigService.php` businesslogica
+- `resources/views` Blade views
+- `database/migrations` datastructuur
+- `database/seeders` testdata
+- `db` SQL scripts
+- `docs` class diagram, ERD, testplan, testrapport
+
+## Zelf pushen naar GitHub
+
+Omdat jij zelf commit/push doet, kun je dit gebruiken:
+
+```bash
+git remote remove origin
+git remote add origin https://github.com/samirloul/opdracht_7.git
+git add .
+git commit -m "Update README and project files"
+git push -u origin feature-opdracht7
+```
+
+Als je naar `main` wilt pushen:
+```bash
+git checkout main
+git merge feature-opdracht7
+git push -u origin main
+```
