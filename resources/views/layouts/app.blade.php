@@ -76,7 +76,16 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 760px;
+            min-width: 720px;
+        }
+
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: #fff;
         }
 
         th, td {
@@ -158,30 +167,52 @@
         }
 
         .pagination {
-            margin-top: 14px;
+            margin-top: 16px;
         }
 
-        .pagination nav {
-            display: inline-flex;
+        .pager {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .pager-meta {
+            margin: 0;
+            color: var(--soft-ink);
+            font-size: 14px;
+        }
+
+        .pager-list {
+            display: flex;
+            flex-wrap: wrap;
             gap: 4px;
             align-items: center;
+            padding: 0;
+            margin: 0;
+            list-style: none;
         }
 
-        .pagination a,
-        .pagination span {
+        .pager-list a,
+        .pager-list span {
             border: 1px solid var(--line);
             background: #fff;
             color: var(--ink);
             text-decoration: none;
-            padding: 4px 8px;
+            padding: 6px 10px;
             border-radius: 4px;
             font-size: 13px;
+            display: inline-block;
         }
 
-        .pagination .active span {
+        .pager-list .is-active {
             background: var(--accent);
             color: #fff;
             border-color: var(--accent);
+        }
+
+        .pager-list .is-disabled {
+            color: #8e8e8e;
+            background: #f6f6f6;
         }
 
         @keyframes fade-in {
@@ -192,7 +223,13 @@
         @media (max-width: 768px) {
             .shell { padding: 14px; }
             .panel { padding: 14px; }
-            th, td { padding: 8px; }
+            .topnav a { flex: 1 1 100%; text-align: center; }
+            table { min-width: 620px; }
+            th, td { padding: 8px; font-size: 13px; }
+            .row { gap: 10px; }
+            .field { flex: 1 1 100%; }
+            .btn, .actions a, .actions button { width: 100%; text-align: center; margin-bottom: 6px; }
+            .pager-list a, .pager-list span { padding: 8px 10px; }
         }
     </style>
 </head>
