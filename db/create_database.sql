@@ -1,6 +1,6 @@
 -- BE-opdracht 07 - create script (MySQL)
 DROP DATABASE IF EXISTS be_opdracht7;
-CREATE DATABASE be_opdracht7 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE be_opdracht7;
 USE be_opdracht7;
 
 CREATE TABLE instructeurs (
