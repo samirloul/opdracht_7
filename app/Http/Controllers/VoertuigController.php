@@ -54,7 +54,7 @@ class VoertuigController extends Controller
             ->orderBy('achternaam')
             ->get();
 
-        $typeVoertuigen = TypeVoertuig::query()->orderBy('rijbewijscategorie')->get();
+        $typeVoertuigen = TypeVoertuig::query()->orderBy('rijbewijscategorie', 'asc')->get();
 
         $selectedInstructeurId = $voertuig->toewijzing->instructeur_id ?? $instructeur->id;
         $isDaf = strtoupper(trim($voertuig->type)) === 'DAF';
